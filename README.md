@@ -78,8 +78,8 @@ All conditions are met. We can proceed to interpret the regression output and dr
 Using the predict(), I predicted what the total cupping points would be if the coffee beans were grown at an altitude of 1000, 2000, and 5000.
 
 At an altitude of 1000 meters, the predicted score is 81.84609 total cupping points out of 100.
-At an altitude of 1000 meters, the predicted score is 82.85393  total cupping points out of 100.
-At an altitude of 1000 meters, the predicted score is 85.87746  total cupping points out of 100.
+At an altitude of 2000 meters, the predicted score is 82.85393  total cupping points out of 100.
+At an altitude of 5000 meters, the predicted score is 85.87746  total cupping points out of 100.
 
 <br>
 

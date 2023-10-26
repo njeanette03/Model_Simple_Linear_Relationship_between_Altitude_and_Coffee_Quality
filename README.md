@@ -57,17 +57,16 @@ Linear regression relies on certain assumptions:
 A good way to check conditions is to use some visualizations. Below is a scatterplot of the relationship between coffee quality and altitude. We can see that the points form a slight positive linear relationship and that variance is the same across all values of the x-axis, which prove the assumptions of Linearity and Equal Variance.
 <br>
 
-![image](https://github.com/njeanette03/Simple_Linear_Regression_Project/assets/67883452/5c56cef6-ef42-42d6-a125-229c9f6546c4)
+![](https://github.com/njeanette03/Simple_Linear_Regression_Project/blob/main/images/SLR.png)
 
 
 To check the independence of errors, we can look at the scatterplot below of the Residuals vs Fitted values. The correlation is approximately 0 and therefore is independent of errors and we can assume there is no relationship between the residuals and the variable, with total cupping points as the response and altitude as the predictor.
 
-![image](https://github.com/njeanette03/Simple_Linear_Regression_Project/assets/67883452/40a6259a-f36e-43b8-995a-30a33a1d545c)
-
+![](https://github.com/njeanette03/Simple_Linear_Regression_Project/blob/main/images/resid_vs_fitted.png)
 
 Lastly, to check the normality, we can look at the histogram of the residuals below. It is bell shaped which indicates normality.
 
-![image](https://github.com/njeanette03/Simple_Linear_Regression_Project/assets/67883452/7127f074-3f54-4791-b1c4-0c0563a6c798)
+![](https://github.com/njeanette03/Simple_Linear_Regression_Project/blob/main/images/hist.png)
 
 
 All conditions are met. We can proceed to interpret the regression output and draw inferences regarding our model estimates.
@@ -93,7 +92,12 @@ Using the confint() to find our confidence interval, we are 95% confident that f
 
 # Interpretation of P-value and Conclusion
 
-Calculating the p-value, we get 2.293869e-08 or 0.00000002293869. Assuming α = 0.05, our p-value is much smaller than our 0.05 level of significance so this tells us to reject our null hypothesis and that our independent variable of altitude has a significant relationship with our dependent variable of cupping points. This also means that our interpretation of our slope was correct and we can conclude that there is a relationship between coffee quality (Total Cup Points) and altitude. Therefore, the higher the altitude of the coffee, the better the quality. So next time you’re stuck between grabbing two bags of coffee beans, you can choose the one with higher elevation (altitude), to statistically give you a better cup of joe.
+Calculating the p-value, we get 2.293869e-08 or 0.00000002293869. 
+
+Assuming α = 0.05, our p-value is much smaller than our 0.05 level of significance so this tells us to reject our null hypothesis and that our independent variable of altitude has a significant relationship with our dependent variable of cupping points. This also means that our interpretation of our slope was correct and we can conclude that there is a relationship between coffee quality (Total Cup Points) and altitude. 
+
+Therefore, the higher the altitude of the coffee, the better the quality. So next time you’re stuck between grabbing two bags of coffee beans, you can choose the one with higher elevation (altitude), to statistically give you a better cup of joe.
 
 # Considerations
+
 For this project, we used only Arabica beans as there were not large enough of a sample size for Robusta beans. However, Robusta beans tend to grow on a lower elevation compared to Arabica and I believe a future dataset which includes it would be a more accurate representation between coffee quality and altitude. As linear regressions are sensitive to outliers, we removed any outliers, such as no ratings or extreme altitudes that are poor sampling.

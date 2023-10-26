@@ -1,0 +1,159 @@
+---
+title: "Coffee"
+output: pdf_document
+date: "2022-12-01"
+editor_options: 
+  markdown: 
+    wrap: 72
+---
+
+#load packages
+```{r}
+#install.packages("tidytuesdayR") 
+#library(tidytuesdayR) 
+#tt_available()
+#library(tidyverse)
+```
+
+
+#load the dataset 
+```{r}
+coffee_ratings <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-07-07/coffee_ratings.csv')
+```
+
+#check dataset
+```{r}
+head(coffee_ratings)
+```
+
+#clean data to include only arabica beans and exclude outliers
+```{r}
+coffee_ara <- coffee_ratings %>% 
+  filter(species == "Arabica", 
+         altitude_mean_meters >= 40, 
+         altitude_mean_meters <= 5000,
+         total_cup_points > 0)
+```
+
+
+#summary statistics
+
+```{r}
+glimpse(coffee_ara)
+```
+
+```{r}
+summary(coffee_ara)
+```
+
+#plot slr 
+```{r}
+plot(y=coffee_ara$total_cup_points, x = coffee_ara$altitude_mean_meters,
+  ylab="Total Cupping Points", xlab="Altitude (meters)", 
+  main = "Relationship between Coffee Quality and Altitude", 
+  ylim=c(50,100)) +
+  abline(lm(total_cup_points~altitude_mean_meters,data=coffee_ara),
+  col='red')
+```
+
+
+#fit a regression model 
+```{r}
+slrmodel <-lm(total_cup_points~altitude_mean_meters,data=coffee_ara)
+```
+
+#get list of residuals 
+```{r}
+res <- resid(slrmodel)
+```
+
+#produce residual vs. fitted plot to check independence of errors
+```{r}
+plot(fitted(slrmodel), res,ylab="Residuals", 
+  xlab="Fitted Values", 
+  main = "Residuals vs Fitted (response is total cupping points)")
+#add a horizontal line at 0 
+abline(0,0)
+```
+
+#check normality 
+```{r}
+hist(res, main="Residuals")
+```
+
+
+#check equal variance 
+```{r}
+plot(fitted(slrmodel), res, ylab="Residuals",
+xlab="Fitted Values", main = "Residuals vs Fitted (response is total
+cupping points)")
+```
+
+
+#summary statistics for cup score
+```{r}
+summarise(coffee_ara,cupscore_mean=mean(total_cup_points),cupscore_sd=sd(total_cup_points))
+```
+
+#summary statistics for altitude 
+```{r}
+summarise(coffee_ara,
+alt_mean=mean(altitude_mean_meters),alt_sd=sd(altitude_mean_meters))
+```
+
+
+#table with mean and sd for variables
+| Variables     | Mean | SD   |
+|---------------|------|------|
+| Cupping Score | 82.2 | 2.66 |
+| Altitude      | 1348 | 449  |
+
+
+#Coefficients and Standard Error 
+```{r}
+summary(slrmodel)
+
+#The first two columns of the summary output have the coefficients for the slope and intercept as well as their standard errors. This is the easiest way to find this information as it is all in one spot. These coefficients will help make the linear equation and the standard errors show how much error there is in a certain variable.
+```
+
+#hypothesis test 
+```{r}
+tstat <-coef(summary(slrmodel))[2,1]/coef(summary(slrmodel))[2,2] 
+tstat
+```
+
+#p-value 
+```{r}
+2*pt(tstat, 1060, lower.tail=FALSE)
+
+#conclusion: Here we can see our P-value is much smaller than our .05 level of significance so this tells us to reject our null hypothesis and that our predictor variable of altitude has a significant relationship with our response variable of cupping points. This also means that our interpretation of our slope was correct.
+```
+
+
+#Coefficient Confidence Intervals 
+```{r}
+confint(slrmodel, level=.95)
+
+#For every 1 meter in altitude, we are 95% confident that the cupping points increase between 0.0006566442 to 0.00135904 points.
+```
+
+
+#correlation coefficient 
+```{r}
+x <- coffee_ara$altitude_mean_meters
+y <- coffee_ara$total_cup_points
+cor(x,y)
+```
+
+#predict total cupping points at which altitude is 1000,2000,5000.
+```{r}
+#define new observation
+newdata <- data.frame(altitude_mean_meters=c(1000, 2000, 5000))
+newdata
+
+predict(slrmodel, newdata)
+```
+
+
+#export dataframe to CSV file
+#write_csv(coffee_ara,file='/Users/jen/R_file.csv')

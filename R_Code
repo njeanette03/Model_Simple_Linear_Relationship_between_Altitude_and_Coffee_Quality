@@ -31,7 +31,7 @@ head(coffee_ratings)
 coffee_ara <- coffee_ratings %>% 
   filter(species == "Arabica", 
          altitude_mean_meters >= 40, 
-         altitude_mean_meters <= 5000,
+         altitude_mean_meters <= 6500,
          total_cup_points > 0)
 ```
 

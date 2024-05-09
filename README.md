@@ -11,8 +11,8 @@ In order to find the relationship between altitude and coffee quality, we will b
 1) to estimate the association between altitude and total cupping points, and
 2) to predict the response for a given value of the total cupping points.
     
-H0: There is no relationship between altitude and coffee quality (total cup points) \
-H1: there is a relationship between altitude and coffee quality (total cup points)
+H_0: There is no relationship between altitude and coffee quality (total cup points) \
+H_1: there is a relationship between altitude and coffee quality (total cup points)
 
 # Dataset
 
@@ -31,7 +31,7 @@ For this project, we are using the following packages to be used in R.
 
 **Linear Regression**
 
-Linear Regression is a statistical technique which is used to find the linear relationship between one dependent and one or more independent variables. We will be using the Single Linear Regression model.
+Linear Regression is a statistical technique which is used to find the linear relationship between one dependent and one or more independent variables. We will be using the Simple Linear Regression model.
 
 Our model will take the form of Y = 𝛽0 + 𝛽1x 
 
@@ -85,7 +85,7 @@ At an altitude of 5000 meters, the predicted score is 85.87746  total cupping po
 
 # Confidence Interval
 
-A confidence interval measures the degree or uncertainty or certainty.
+A confidence interval measures the degree of uncertainty or certainty.
 
 Using the confint() to find our confidence interval, we are 95% confident that for every 1 meter in altitude, the total cupping points increase between 0.0006566442 to 0.00135904.
 
